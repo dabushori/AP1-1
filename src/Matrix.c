@@ -135,11 +135,12 @@ ErrorCode matrix_setValue(PMatrix matrix, uint32_t rowIndex, uint32_t colIndex,
   if (matrix == NULL) {
     return ERROR_NULL;
   }
-  if (matrix->height <= rowIndex || matrix->width <= colIndex) {
+  int row = (int) rowIndex, col = (int) colIndex;
+  if (matrix->height <= row || matrix->width <= col) {
     return ERROR_OUT_OF_BOUNDS;
   }
 
-  matrix->values[rowIndex][colIndex] = value;
+  matrix->values[row][col] = value;
   return ERROR_SUCCESS;
 }
 
@@ -158,11 +159,12 @@ ErrorCode matrix_getValue(CPMatrix matrix, uint32_t rowIndex, uint32_t colIndex,
   if (matrix == NULL || value == NULL) {
     return ERROR_NULL;
   }
-  if (matrix->height <= rowIndex || matrix->width <= colIndex) {
+  int row = (int) rowIndex, col = (int) colIndex;
+  if (matrix->height <= row || matrix->width <= col) {
     return ERROR_OUT_OF_BOUNDS;
   }
 
-  *value = matrix->values[rowIndex][colIndex];
+  *value = matrix->values[row][col];
   return ERROR_SUCCESS;
 }
 
