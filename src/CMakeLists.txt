@@ -6,9 +6,6 @@ add_compile_options(-Wall -Wextra -pedantic -Werror)
 
 add_library(matrix SHARED ErrorCode.c Matrix.c)
 
-include_directories(/home/dabushori/ex1_demo/build/libmatrix.so)
-link_directories(/home/dabushori/ex1_demo/build/libmatrix.so)
-
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
 include(CPack)
