@@ -35,11 +35,17 @@ ErrorCode matrix_create(PMatrix *matrix, uint32_t height, uint32_t width) {
   // creating the 2D-array
   mat->values = (double **)malloc(height * sizeof(double *));
   if (mat->values == NULL) {
+    free(mat);
     return ERROR_ALLOCATION_FAILED;
   }
   for (int i = 0; i < mat->height; i++) {
     mat->values[i] = (double *)calloc(width, sizeof(double));
     if (mat->values[i] == NULL) {
+      for (int j = 0; j < i; j++) {
+        free(mat->values[j]);
+      }
+      free(mat->values);
+      free(mat);
       return ERROR_ALLOCATION_FAILED;
     }
   }
@@ -135,7 +141,7 @@ ErrorCode matrix_setValue(PMatrix matrix, uint32_t rowIndex, uint32_t colIndex,
   if (matrix == NULL) {
     return ERROR_NULL;
   }
-  int row = (int) rowIndex, col = (int) colIndex;
+  int row = (int)rowIndex, col = (int)colIndex;
   if (matrix->height <= row || matrix->width <= col) {
     return ERROR_OUT_OF_BOUNDS;
   }
@@ -159,7 +165,7 @@ ErrorCode matrix_getValue(CPMatrix matrix, uint32_t rowIndex, uint32_t colIndex,
   if (matrix == NULL || value == NULL) {
     return ERROR_NULL;
   }
-  int row = (int) rowIndex, col = (int) colIndex;
+  int row = (int)rowIndex, col = (int)colIndex;
   if (matrix->height <= row || matrix->width <= col) {
     return ERROR_OUT_OF_BOUNDS;
   }
