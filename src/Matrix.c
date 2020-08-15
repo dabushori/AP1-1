@@ -71,7 +71,9 @@ ErrorCode matrix_copy(PMatrix *result, CPMatrix source) {
     return ERROR_NULL;
   }
 
-  ErrorCode code = matrix_create(result, source->height, source->width);
+  uint32_t h = source->height, w = source->width;
+  ErrorCode code =
+      matrix_create(result, h, w);
   if (!error_isSuccess(code)) {
     return code;
   }
