@@ -23,6 +23,10 @@ ErrorCode matrix_create(PMatrix *matrix, uint32_t height, uint32_t width) {
     return ERROR_NULL;
   }
 
+  if (height == 0 || width == 0) {
+    return ERROR_SIZES_NOT_MATCH;
+  }
+
   PMatrix mat = (PMatrix)malloc(sizeof(Matrix));
   if (mat == NULL) {
     return ERROR_ALLOCATION_FAILED;
@@ -72,10 +76,9 @@ ErrorCode matrix_copy(PMatrix *result, CPMatrix source) {
     return code;
   }
 
-  PMatrix mat = *result;
-  for (int i = 0; i < mat->height; i++) {
-    for (int j = 0; j < mat->width; j++) {
-      mat->values[i][j] = source->values[i][j];
+  for (int i = 0; i < (*result)->height; i++) {
+    for (int j = 0; j < (*result)->width; j++) {
+      (*result)->values[i][j] = source->values[i][j];
     }
   }
 
@@ -88,11 +91,13 @@ ErrorCode matrix_copy(PMatrix *result, CPMatrix source) {
  * @param matrix the matrix to destroy.
  */
 void matrix_destroy(PMatrix matrix) {
-  for (int i = 0; i < matrix->height; i++) {
-    free(matrix->values[i]);
+  if (matrix != NULL) {
+    for (int i = 0; i < matrix->height; i++) {
+      free(matrix->values[i]);
+    }
+    free(matrix->values);
+    free(matrix);
   }
-  free(matrix->values);
-  free(matrix);
 }
 
 /**
