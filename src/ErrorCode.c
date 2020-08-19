@@ -1,25 +1,18 @@
 #include "ErrorCode.h"
 
-bool error_isSuccess(const ErrorCode code) {
-  return code == ERROR_SUCCESS;
-}
+bool error_isSuccess(const ErrorCode code) { return code == ERROR_SUCCESS; }
 
 const char *error_getErrorMessage(const ErrorCode code) {
-  switch (code) {
-  case ERROR_ALLOCATION_FAILED:
+  if (code == ERROR_ALLOCATION_FAILED) {
     return "MEMORY ALLOCATION FAILED";
-    break;
-  case ERROR_NULL:
+  } else if (code == ERROR_NULL) {
     return "NULL POINTER ERROR";
-    break;
-  case ERROR_OUT_OF_BOUNDS:
+  } else if (code == ERROR_OUT_OF_BOUNDS) {
     return "INDEX OUT OF BOUNDS ERROR";
-    break;
-  case ERROR_SIZES_NOT_MATCH:
+  } else if (code == ERROR_SIZES_NOT_MATCH) {
     return "THE SIZES OF THE MATRICES DON'T MATCH";
-    break;
-  default:
+  } else if (code == ERROR_SUCCESS) {
     return "SUCCESS";
-    break;
   }
+  return "UNKOWN ERROR";
 }
