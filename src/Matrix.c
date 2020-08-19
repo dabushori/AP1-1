@@ -1,4 +1,5 @@
 #include "Matrix.h"
+
 #include <stdlib.h>
 
 // The implementation of the struct is up to you
@@ -72,8 +73,7 @@ ErrorCode matrix_copy(PMatrix *result, CPMatrix source) {
   }
 
   uint32_t h = source->height, w = source->width;
-  ErrorCode code =
-      matrix_create(result, h, w);
+  ErrorCode code = matrix_create(result, h, w);
   if (!error_isSuccess(code)) {
     return code;
   }
