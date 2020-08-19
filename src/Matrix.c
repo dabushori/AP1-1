@@ -19,7 +19,8 @@ typedef struct Matrix {
  * @param[in] width Width of the matrix
  * @return ErrorCode
  */
-ErrorCode matrix_create(PMatrix *matrix, uint32_t height, uint32_t width) {
+ErrorCode matrix_create(PMatrix *const matrix, const uint32_t height,
+                        const uint32_t width) {
   if (matrix == NULL) {
     return ERROR_NULL;
   }
@@ -67,7 +68,7 @@ ErrorCode matrix_create(PMatrix *matrix, uint32_t height, uint32_t width) {
  * @param[in] source The matrix to copy.
  * @return ErrorCode
  */
-ErrorCode matrix_copy(PMatrix *result, CPMatrix source) {
+ErrorCode matrix_copy(PMatrix *const result, CPMatrix const source) {
   if (source == NULL || result == NULL) {
     return ERROR_NULL;
   }
@@ -92,7 +93,7 @@ ErrorCode matrix_copy(PMatrix *result, CPMatrix source) {
  *
  * @param matrix the matrix to destroy.
  */
-void matrix_destroy(PMatrix matrix) {
+void matrix_destroy(PMatrix const matrix) {
   if (matrix != NULL) {
     for (int i = 0; i < matrix->height; i++) {
       free(matrix->values[i]);
@@ -109,7 +110,7 @@ void matrix_destroy(PMatrix matrix) {
  * @param[out] result On output, contains the height of the matrix.
  * @return ErrorCode
  */
-ErrorCode matrix_getHeight(CPMatrix matrix, uint32_t *result) {
+ErrorCode matrix_getHeight(CPMatrix const matrix, uint32_t *const result) {
   if (matrix == NULL || result == NULL) {
     return ERROR_NULL;
   }
@@ -125,7 +126,7 @@ ErrorCode matrix_getHeight(CPMatrix matrix, uint32_t *result) {
  * @param[out] result On output, contains the height of the matrix.
  * @return ErrorCode
  */
-ErrorCode matrix_getWidth(CPMatrix matrix, uint32_t *result) {
+ErrorCode matrix_getWidth(CPMatrix const matrix, uint32_t *const result) {
   if (matrix == NULL || result == NULL) {
     return ERROR_NULL;
   }
@@ -143,8 +144,8 @@ ErrorCode matrix_getWidth(CPMatrix matrix, uint32_t *result) {
  * @param[in] value Value to set.
  * @return ErrorCode
  */
-ErrorCode matrix_setValue(PMatrix matrix, uint32_t rowIndex, uint32_t colIndex,
-                          double value) {
+ErrorCode matrix_setValue(PMatrix const matrix, const uint32_t rowIndex,
+                          const uint32_t colIndex, const double value) {
   if (matrix == NULL) {
     return ERROR_NULL;
   }
@@ -167,8 +168,8 @@ ErrorCode matrix_setValue(PMatrix matrix, uint32_t rowIndex, uint32_t colIndex,
  *  the value from the matrix.
  * @return ErrorCode
  */
-ErrorCode matrix_getValue(CPMatrix matrix, uint32_t rowIndex, uint32_t colIndex,
-                          double *value) {
+ErrorCode matrix_getValue(CPMatrix const matrix, const uint32_t rowIndex,
+                          const uint32_t colIndex, double *const value) {
   if (matrix == NULL || value == NULL) {
     return ERROR_NULL;
   }
@@ -190,7 +191,7 @@ ErrorCode matrix_getValue(CPMatrix matrix, uint32_t rowIndex, uint32_t colIndex,
  * @param[in] rhs The right hand side of the addition operation.
  * @return ErrorCode
  */
-ErrorCode matrix_add(PMatrix *result, CPMatrix lhs, CPMatrix rhs) {
+ErrorCode matrix_add(PMatrix *const result, CPMatrix const lhs, CPMatrix const rhs) {
   if (lhs == NULL || rhs == NULL) {
     return ERROR_NULL;
   }
@@ -221,7 +222,7 @@ ErrorCode matrix_add(PMatrix *result, CPMatrix lhs, CPMatrix rhs) {
  * @param[in] rhs The right hand side of the multiplication operation.
  * @return ErrorCode
  */
-ErrorCode matrix_multiplyMatrices(PMatrix *result, CPMatrix lhs, CPMatrix rhs) {
+ErrorCode matrix_multiplyMatrices(PMatrix *const result, CPMatrix const lhs, CPMatrix const rhs) {
   if (lhs == NULL || rhs == NULL) {
     return ERROR_NULL;
   }
@@ -256,7 +257,7 @@ ErrorCode matrix_multiplyMatrices(PMatrix *result, CPMatrix lhs, CPMatrix rhs) {
  * @param[in] scalar The scalar to multiply with.
  * @return ErrorCode
  */
-ErrorCode matrix_multiplyWithScalar(PMatrix matrix, double scalar) {
+ErrorCode matrix_multiplyWithScalar(PMatrix const matrix, const double scalar) {
   if (matrix == NULL) {
     return ERROR_NULL;
   }
