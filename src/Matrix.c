@@ -44,10 +44,10 @@ ErrorCode matrix_create(PMatrix *const matrix, const uint32_t height,
     free(mat);
     return ERROR_ALLOCATION_FAILED;
   }
-  for (uint32_t i = 0; i < mat->height; i++) {
+  for (uint32_t i = 0; i < mat->height; ++i) {
     mat->values[i] = (double *)calloc(width, sizeof(double));
     if (mat->values[i] == NULL) {
-      for (uint32_t j = 0; j < i; j++) {
+      for (uint32_t j = 0; j < i; ++j) {
         free(mat->values[j]);
       }
       free(mat->values);
@@ -78,8 +78,8 @@ ErrorCode matrix_copy(PMatrix *const result, CPMatrix const source) {
     return code;
   }
 
-  for (uint32_t i = 0; i < (*result)->height; i++) {
-    for (uint32_t j = 0; j < (*result)->width; j++) {
+  for (uint32_t i = 0; i < (*result)->height; ++i) {
+    for (uint32_t j = 0; j < (*result)->width; ++j) {
       (*result)->values[i][j] = source->values[i][j];
     }
   }
@@ -94,7 +94,7 @@ ErrorCode matrix_copy(PMatrix *const result, CPMatrix const source) {
  */
 void matrix_destroy(PMatrix const matrix) {
   if (matrix != NULL) {
-    for (uint32_t i = 0; i < matrix->height; i++) {
+    for (uint32_t i = 0; i < matrix->height; ++i) {
       free(matrix->values[i]);
     }
     free(matrix->values);
@@ -204,8 +204,8 @@ ErrorCode matrix_add(PMatrix *const result, CPMatrix const lhs, CPMatrix const r
   }
 
   PMatrix matrix = *result;
-  for (uint32_t i = 0; i < lhs->height; i++) {
-    for (uint32_t j = 0; j < lhs->width; j++) {
+  for (uint32_t i = 0; i < lhs->height; ++i) {
+    for (uint32_t j = 0; j < lhs->width; ++j) {
       matrix->values[i][j] = lhs->values[i][j] + rhs->values[i][j];
     }
   }
@@ -236,10 +236,10 @@ ErrorCode matrix_multiplyMatrices(PMatrix *const result, CPMatrix const lhs, CPM
   }
 
   PMatrix matrix = *result;
-  for (uint32_t i = 0; i < matrix->height; i++) {
-    for (uint32_t j = 0; j < matrix->width; j++) {
+  for (uint32_t i = 0; i < matrix->height; ++i) {
+    for (uint32_t j = 0; j < matrix->width; ++j) {
       double val = 0;
-      for (uint32_t k = 0; k < lhs->width; k++) {
+      for (uint32_t k = 0; k < lhs->width; ++k) {
         val += lhs->values[i][k] * rhs->values[k][j];
       }
       matrix->values[i][j] = val;
@@ -262,8 +262,8 @@ ErrorCode matrix_multiplyWithScalar(PMatrix const matrix, const double scalar) {
     return ERROR_NULL;
   }
 
-  for (uint32_t i = 0; i < matrix->height; i++) {
-    for (uint32_t j = 0; j < matrix->width; j++) {
+  for (uint32_t i = 0; i < matrix->height; ++i) {
+    for (uint32_t j = 0; j < matrix->width; ++j) {
       matrix->values[i][j] *= scalar;
     }
   }
