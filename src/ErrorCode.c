@@ -1,13 +1,13 @@
 #include "ErrorCode.h"
 
-bool error_isSuccess(ErrorCode code) {
+bool error_isSuccess(const ErrorCode code) {
   if (code == ERROR_SUCCESS) {
     return true;
   }
   return false;
 }
 
-const char *error_getErrorMessage(ErrorCode code) {
+const char *error_getErrorMessage(const ErrorCode code) {
   switch (code) {
   case ERROR_ALLOCATION_FAILED:
     return "MEMORY ALLOCATION FAILED";
