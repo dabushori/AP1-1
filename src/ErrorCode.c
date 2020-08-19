@@ -4,15 +4,15 @@ bool error_isSuccess(const ErrorCode code) { return code == ERROR_SUCCESS; }
 
 const char *error_getErrorMessage(const ErrorCode code) {
   if (code == ERROR_ALLOCATION_FAILED) {
-    return "MEMORY ALLOCATION FAILED";
+    return "memory allocation failed";
   } else if (code == ERROR_NULL) {
-    return "NULL POINTER ERROR";
+    return "one of the given pointers is NULL";
   } else if (code == ERROR_OUT_OF_BOUNDS) {
-    return "INDEX OUT OF BOUNDS ERROR";
+    return "the given index is out of the matrix bounds";
   } else if (code == ERROR_SIZES_NOT_MATCH) {
-    return "THE SIZES OF THE MATRICES DON'T MATCH";
+    return "the sizes of the matrixes doesn't match";
   } else if (code == ERROR_SUCCESS) {
-    return "SUCCESS";
+    return "success";
   }
-  return "UNKOWN ERROR";
+  return "unkown error accured";
 }
