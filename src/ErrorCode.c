@@ -1,10 +1,7 @@
 #include "ErrorCode.h"
 
 bool error_isSuccess(const ErrorCode code) {
-  if (code == ERROR_SUCCESS) {
-    return true;
-  }
-  return false;
+  return code == ERROR_SUCCESS;
 }
 
 const char *error_getErrorMessage(const ErrorCode code) {
